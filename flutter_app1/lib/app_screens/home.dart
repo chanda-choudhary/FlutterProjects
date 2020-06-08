@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -10,7 +12,17 @@ class Home extends StatelessWidget {
       /*width: 200.0,
       height: 100.0,
       margin: EdgeInsets.only(left: 35.0,top:50.0 ),*/
-      child: Text("Flight", textDirection: TextDirection.ltr),
+      child: Text(
+          "Flight",
+          textDirection: TextDirection.ltr,
+          style: TextStyle(
+              decoration: TextDecoration.none,
+              fontSize: 75,
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.w300,
+              color: Colors.white,
+          ),
+      ),
     ));
   }
 }
