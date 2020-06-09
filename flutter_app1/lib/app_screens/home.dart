@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -7,7 +8,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Container(
-            padding: EdgeInsets.only(left: 10.0,top: 40.0),
+            padding: EdgeInsets.only(left: 10.0, top: 40.0),
             alignment: Alignment.center,
             color: Colors.deepPurple,
             /*width: 200.0,
@@ -53,7 +54,7 @@ class Home extends StatelessWidget {
                         textDirection: TextDirection.ltr,
                         style: TextStyle(
                           decoration: TextDecoration.none,
-                          fontSize: 35 ,
+                          fontSize: 35,
                           fontFamily: 'Raleway',
                           fontWeight: FontWeight.w300,
                           color: Colors.white,
@@ -75,18 +76,58 @@ class Home extends StatelessWidget {
                     )
                   ],
                 ),
-                FlightImageAssets()
+                FlightImageAssets(),
+                FlightBookingButton()
               ],
             )));
   }
 }
-class FlightImageAssets extends StatelessWidget{
+
+class FlightImageAssets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    AssetImage assetImage=AssetImage('images/flight.png');
-    Image image=Image(image: assetImage,width: 250.0,height: 250.0,);
-    return Container(child: image,);
+    AssetImage assetImage = AssetImage('images/flight.png');
+    Image image = Image(
+      image: assetImage,
+      width: 250.0,
+      height: 250.0,
+    );
+    return Container(
+      child: image,
+    );
+  }
+}
+
+class FlightBookingButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      margin: EdgeInsets.only(top: 30.0),
+      width: 250.0,
+      height: 50.0,
+      child: RaisedButton(
+          color: Colors.deepOrange,
+          child: Text(
+            "Book Your Flight",
+            style: TextStyle(
+                fontFamily: 'Raleway',
+                fontWeight: FontWeight.w700,
+                fontSize: 20.0,
+                color: Colors.white),
+          ),
+          elevation: 6.0,
+          onPressed: () => bookFlight(context)),
+    );
   }
 
+  void bookFlight(BuildContext context) {
+    var alertDialog = AlertDialog(
+      title: Text("Flight Booked Successfully"),
+      content: Text("Have a pleasant journey"),
+    );
+    showDialog(
+        context: context, builder: (BuildContext context) => alertDialog);
+  }
 }
