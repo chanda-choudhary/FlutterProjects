@@ -128,6 +128,7 @@ class FlightBookingButton extends StatelessWidget {
       content: Text("Have a pleasant journey"),
     );
     showDialog(
-        context: context, builder: (BuildContext context) => alertDialog);
+        context: context,
+        builder: (BuildContext context) => alertDialog);
   }
 }
