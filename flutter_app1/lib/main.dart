@@ -1,56 +1,55 @@
 import 'package:flutter/material.dart';
-import './app_screens/home.dart';
 
-void main() {
+void main(){
   runApp(
-      MaterialApp(
-        title: "Exploring UI Widget",
-        home: Scaffold(
-          appBar: AppBar(title: Text("Long List"),),
-          body: getListView(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              debugPrint("FAB is clicked");
-            },
-            child: Icon(Icons.add),
-            tooltip: 'Add one more item',
-          ),
+    MaterialApp(
+      title: "Stateful App Example",
+      home: FavoriteCity(),
+    )
+  );
+}
+
+class FavoriteCity extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _FavoriteCityState();
+  }
+}
+
+class _FavoriteCityState extends State<FavoriteCity> {
+  String nameCity="";
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    debugPrint("Favorite city widget is created");
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Stateful App Example"),
+      ),
+      body: Container(
+        margin: EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              //onSubmitted can replace with onChanged
+              onSubmitted: (String userInput){
+                debugPrint("setState is called,this tells framework to redraw FavCity widget.");
+                setState(() {
+                  nameCity=userInput;
+                });
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.all(30.0),
+              child: Text(
+                "Your best city is $nameCity",
+                style: TextStyle(fontSize: 20.0),
+              ),
+            )
+          ],
         ),
-      )
-  );
-}
-
-void showSnackBar(BuildContext context, String items) {
-  var snackBar = SnackBar(
-    content: Text("You just tapped $items"),
-    action: SnackBarAction(
-        label: "UNDO",
-        onPressed: (){
-          debugPrint("Performing dummy undo operation");
-  },
-  )
-  ,);
-  Scaffold.of(context).showSnackBar(snackBar
-  );
-}
-
-List<String> getListElements() {
-  var items = List<String>.generate(1000, (counter) => "Item : $counter");
-  return items;
-}
-
-Widget getListView() {
-  var listItems = getListElements();
-  var listView = ListView.builder(
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: Icon(Icons.arrow_right),
-          title: Text(listItems[index]),
-          onTap: () {
-            showSnackBar(context, listItems[index]);
-          },
-        );
-      }
-  );
-  return listView;
+      ),
+    );
+  }
 }
